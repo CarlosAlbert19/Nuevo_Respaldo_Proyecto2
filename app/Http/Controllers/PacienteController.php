@@ -14,7 +14,8 @@ class PacienteController extends Controller
      */
     public function index()
     {
-        //
+        $pacientes = Paciente::all();
+        return view('pacientes/pacientesIndex', compact('pacientes'));
     }
 
     /**
@@ -35,7 +36,18 @@ class PacienteController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'nombre' => 'required|min:3|max:100',
+            'correo' => ['required', 'email'],
+            'genero' => 'required',
+            'sangre' => 'required',
+            'comentario' => 'required|max:255',
+            'ingreso' => 'required'
+        ]);
+
+        Paciente::create($request->all());
+
+        return redirect('/paciente');
     }
 
     /**

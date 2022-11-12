@@ -10,6 +10,7 @@
     <h1>Registro de pacientes en el Hospital Amparito</h1><br>
     <form action="/paciente" method="POST">
             @csrf
+            
             <label for="name"> Nombre del paciente:<br> 
                 <input id="name" type="text" name="nombre" value="{{ old('nombre')}}"> 
             </label>
