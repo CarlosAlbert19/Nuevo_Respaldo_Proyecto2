@@ -58,7 +58,7 @@ class PacienteController extends Controller
      */
     public function show(Paciente $paciente)
     {
-        //
+        return view('pacientes/pacienteShow', compact('paciente'));
     }
 
     /**
@@ -69,7 +69,7 @@ class PacienteController extends Controller
      */
     public function edit(Paciente $paciente)
     {
-        //
+        return view('pacientes/pacientesEdit', compact('paciente'));
     }
 
     /**
@@ -81,7 +81,28 @@ class PacienteController extends Controller
      */
     public function update(Request $request, Paciente $paciente)
     {
-        //
+        $request->validate([
+            'nombre' => 'required|min:3|max:100',
+            'correo' => ['required', 'email'],
+            'genero' => 'required',
+            'sangre' => 'required',
+            'comentario' => 'required|max:255',
+            'ingreso' => 'required'
+        ]);
+
+        $paciente->nombre = $request ->nombre;
+        $paciente->correo = $request ->correo;
+        $paciente->genero = $request ->genero;
+        $paciente->sangre = $request ->sangre;
+        $paciente->comentario = $request ->comentario;
+        $paciente->ingreso = $request ->ingreso;
+        $paciente->save();
+
+        //Paciente::where('id', $paciente->id)->update($request->all());
+        //Paciente::where('id', $paciente->id)->update($request->except('_token', '_method'));
+
+        return redirect('/paciente');
+
     }
 
     /**
@@ -92,6 +113,8 @@ class PacienteController extends Controller
      */
     public function destroy(Paciente $paciente)
     {
-        //
+        $paciente->delete();
+
+        return redirect('/paciente');
     }
 }
