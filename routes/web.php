@@ -19,3 +19,7 @@ Route::get('/', function () {
 });
 
 Route::resource('paciente', PacienteController::class);
+
+Route::get('prueba_assets', function(){
+    return view('prueba_de_assets');
+});
