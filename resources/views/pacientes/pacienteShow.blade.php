@@ -11,6 +11,27 @@
 
     <a href="/paciente">Regresar al lista de pacientes</a><br><br>
 
-    <h2>{{ $paciente->nombre }}</h2>
+    <h2>Paciente: {{ $paciente->nombre }}</h2>
+
+    <table border="1">
+        <tr>
+            <th>ID</th>
+            <th>Nombre</th>
+            <th>Correo</th>
+            <th>Genero</th>
+            <th>Sangre</th>
+            <th>Comentario</th>
+            <th>Ingreso</th>
+        </tr>
+        <tr>
+            <td> {{ $paciente->id }}</td>
+            <td> {{ $paciente->nombre }} </td>
+            <td> {{ $paciente->correo }}</td>
+            <td> {{ $paciente->genero }}</td>
+            <td> {{ $paciente->sangre }}</td>
+            <td> {{ $paciente->comentario }}</td>
+            <td> {{ $paciente->ingreso }}</td>
+        </tr>
+    </table>
 </body>
 </html>

@@ -42,6 +42,7 @@
                         @csrf
                         @method('DELETE')
                         <input type="submit" value="Eliminar">
+                    </form>
                 </td>
             </tr>
         @endforeach

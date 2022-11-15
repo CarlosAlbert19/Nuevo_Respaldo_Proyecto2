@@ -23,3 +23,12 @@ Route::resource('paciente', PacienteController::class);
 Route::get('prueba_assets', function(){
     return view('prueba_de_assets');
 });
+Route::middleware([
+    'auth:sanctum',
+    config('jetstream.auth_session'),
+    'verified'
+])->group(function () {
+    Route::get('/dashboard', function () {
+        return view('dashboard');
+    })->name('dashboard');
+});
