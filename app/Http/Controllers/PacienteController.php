@@ -117,4 +117,9 @@ class PacienteController extends Controller
 
         return redirect('/paciente');
     }
+
+    public function pagina_de_caida()
+    {
+        return view('landingpage');
+    }
 }

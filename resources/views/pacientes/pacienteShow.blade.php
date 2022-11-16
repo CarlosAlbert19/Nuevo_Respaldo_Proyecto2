@@ -9,7 +9,7 @@
 <body>
     <h1>Detalles del paciente</h1>
 
-    <a href="/paciente">Regresar al lista de pacientes</a><br><br>
+    <a href="/paciente">Regresar a la lista de pacientes</a><br><br>
 
     <h2>Paciente: {{ $paciente->nombre }}</h2>
 

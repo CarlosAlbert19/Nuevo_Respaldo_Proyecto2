@@ -9,6 +9,8 @@
 <body>
     <h1>Listado de pacientes</h1> 
 
+    <a href="/">Regresar a la página principal del Hospital Amparito</a><br><br>
+    
     <a href="/paciente/create">Registrar un nuevo paciente al Hospital Amparito</a><br><br>
 
     <table border="1">
