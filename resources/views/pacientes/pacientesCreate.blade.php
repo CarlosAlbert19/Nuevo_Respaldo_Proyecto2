@@ -83,7 +83,16 @@
             @error('user_id')
                 <i> {{ $message}} </i>
             @enderror
-            <br> <br>
+            <br> 
+
+            <label for="medicamentos_id"> Medicamento(s) <br>
+                <select name="medicamentos_id[]" multiple id="medicamentos_id">
+                    @foreach ($medicamentos as $medicamento)
+                        <option value="{{$medicamento->id}}">{{ $medicamento->nombre }}</option>
+                    @endforeach
+                </select>
+            </label>
+            <br><br>
 
             <input type="submit" value="Enviar">
         </form>

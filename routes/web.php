@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [PacienteController::class, 'pagina_de_caida']);
 
-Route::resource('paciente', PacienteController::class);
+Route::resource('paciente', PacienteController::class);//->middleware('auth');
 
 Route::get('prueba_assets', function(){
     return view('prueba_de_assets');

@@ -3,12 +3,17 @@
 namespace App\Http\Controllers;
 
 use App\Models\Paciente;
+use App\Models\Medicamento;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 
 class PacienteController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth')->except('index', 'show','pagina_de_caida');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -16,9 +21,9 @@ class PacienteController extends Controller
      */
     public function index()
     {
-        //$pacientes = Paciente::all();
+        $pacientes = Paciente::all();
         //$pacientes = Paciente::where('user_id', Auth::id())->get(); 
-        $pacientes = Auth::user()->pacientes;
+        //$pacientes = Auth::user()->pacientes;
         //$pacientes = $user->pacientes;
         return view('pacientes/pacientesIndex', compact('pacientes'));
     }
@@ -31,7 +36,8 @@ class PacienteController extends Controller
     public function create()
     {
         $users = User::all();
-        return view('pacientes/pacientesCreate', compact('users'));
+        $medicamentos = Medicamento::all();
+        return view('pacientes/pacientesCreate', compact('users', 'medicamentos'));
     }
 
     /**
@@ -53,7 +59,9 @@ class PacienteController extends Controller
         ]);
 
         //$request->merge(['user_id' => Auth::id()]);
-        Paciente::create($request->all());
+        $paciente = Paciente::create($request->all());
+
+        $paciente->medicamentos()->attach($request->medicamentos_id);
 
         return redirect('/paciente');
     }
@@ -77,7 +85,9 @@ class PacienteController extends Controller
      */
     public function edit(Paciente $paciente)
     {
-        return view('pacientes/pacientesEdit', compact('paciente'));
+        $users = User::all();
+        $medicamentos = Medicamento::all();
+        return view('pacientes/pacientesEdit', compact('paciente', 'users', 'medicamentos'));
     }
 
     /**
@@ -95,7 +105,8 @@ class PacienteController extends Controller
             'genero' => 'required',
             'sangre' => 'required',
             'comentario' => 'required|max:255',
-            'ingreso' => 'required'
+            'ingreso' => 'required',
+            'user_id' => 'required'
         ]);
 
         $paciente->nombre = $request ->nombre;
