@@ -88,7 +88,7 @@
             <label for="medicamentos_id"> Medicamento(s) <br>
                 <select name="medicamentos_id[]" multiple id="medicamentos_id">
                     @foreach ($medicamentos as $medicamento)
-                        <option value="{{$medicamento->id}}">{{ $medicamento->nombre }}</option>
+                        <option value="{{$medicamento->id}}" {{array_search($medicamento->id, $paciente->medicamentos->pluck('id')->toArray()) !== false ? 'selected' : ''}}>{{ $medicamento->nombre }}</option>
                     @endforeach
                 </select>
             </label>

@@ -55,7 +55,8 @@ class PacienteController extends Controller
             'sangre' => 'required',
             'comentario' => 'required|max:255',
             'ingreso' => 'required',
-            'user_id' => 'required'
+            'user_id' => 'required',
+            'medicamentos_id' => 'required'
         ]);
 
         //$request->merge(['user_id' => Auth::id()]);
@@ -106,21 +107,28 @@ class PacienteController extends Controller
             'sangre' => 'required',
             'comentario' => 'required|max:255',
             'ingreso' => 'required',
-            'user_id' => 'required'
+            'user_id' => 'required',
+            'medicamentos_id' => 'required'
         ]);
 
-        $paciente->nombre = $request ->nombre;
-        $paciente->correo = $request ->correo;
-        $paciente->genero = $request ->genero;
-        $paciente->sangre = $request ->sangre;
-        $paciente->comentario = $request ->comentario;
-        $paciente->ingreso = $request ->ingreso;
-        $paciente->save();
+        // $paciente->nombre = $request ->nombre;
+        // $paciente->correo = $request ->correo;
+        // $paciente->genero = $request ->genero;
+        // $paciente->sangre = $request ->sangre;
+        // $paciente->comentario = $request ->comentario;
+        // $paciente->ingreso = $request ->ingreso;
+        // $paciente->save();
 
         //Paciente::where('id', $paciente->id)->update($request->all());
         //Paciente::where('id', $paciente->id)->update($request->except('_token', '_method'));
 
-        return redirect('/paciente');
+        Paciente::where('id', $paciente->id)->update($request->except('_token', '_method', 'medicamentos_id'));
+
+        $paciente->medicamentos()->sync($request->medicamentos_id);
+
+        //return redirect()->route('paciente/show', $paciente->id);
+        return view('pacientes/pacienteShow', compact('paciente'));
+        
 
     }
 
@@ -132,6 +140,8 @@ class PacienteController extends Controller
      */
     public function destroy(Paciente $paciente)
     {
+        //$paciente->medicamentos->detach();
+
         $paciente->delete();
 
         return redirect('/paciente');
