@@ -7,6 +7,8 @@ export default defineConfig({
             input: [
                 'resources/css/app.css',
                 'resources/js/app.js',
+                'resources/css/materialize.css',
+                'resources/js/materialize.js'
             ],
             refresh: [
                 ...refreshPaths,

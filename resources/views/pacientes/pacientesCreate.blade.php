@@ -8,6 +8,7 @@
 </head>
 <body bgcolor="#00D3D6">
     <h1>Registro de pacientes en el Hospital Amparito</h1><br>
+    <h3>Usuario: {{\Auth::user()->name}}</h3><br>
     <form action="/paciente" method="POST">
             @csrf
             
@@ -68,6 +69,18 @@
                 <input id="access" type="checkbox" name="ingreso"></input>
             </label> 
             @error('ingreso')
+                <i> {{ $message}} </i>
+            @enderror
+            <br> 
+            
+            <label for="user_id"> Doctor
+                <select name="user_id" id="user_id">
+                    @foreach ($users as $user)
+                        <option value="{{$user->id}}">{{ $user->name }}</option>
+                    @endforeach
+                </select>
+            </label>
+            @error('user_id')
                 <i> {{ $message}} </i>
             @enderror
             <br> <br>

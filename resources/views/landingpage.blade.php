@@ -565,7 +565,7 @@
 								<i class="fa fa-location-arrow" aria-hidden="true"></i>
 							</div>
 							<div class="media-body dit-right">
-								<h4>Dirreción</h4>
+								<h4>Dirección</h4>
 								<p>Blvd. Gral. Marcelino García Barragán 1421, Olímpica, 44430 Guadalajara, Jal.</p>
 							</div>
 						</div>

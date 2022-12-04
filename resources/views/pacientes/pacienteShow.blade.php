@@ -1,13 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Paciente especifico</title>
-</head>
-<body>
-    <h1>Detalles del paciente</h1>
+<x-plantilla titulo="Detalles del paciente">
+    <!--<h1>Detalles del paciente</h1>-->
 
     <a href="/paciente">Regresar a la lista de pacientes</a><br><br>
 
@@ -33,5 +25,4 @@
             <td> {{ $paciente->ingreso }}</td>
         </tr>
     </table>
-</body>
-</html>
+</x-plantilla>
