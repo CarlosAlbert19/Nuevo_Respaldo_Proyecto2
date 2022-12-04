@@ -16,6 +16,7 @@
             <th>Comentario</th>
             <th>Ingreso</th>
             <th>Medicamentos</th>
+            <th>Historial clinico</th>
         </tr>
         <tr>
             <td> {{ $paciente->id }}</td>
@@ -32,6 +33,13 @@
                         <li>{{$medicamento->nombre}} ({{$medicamento->tipo}})</li>
                     @endforeach
                 </ol>
+            </td>
+            <td>
+                <ul>
+                    @foreach ($paciente->archivos as $archivo)
+                        <li><a href="{{route('descarga', $archivo)}}">{{$archivo->nombre_original}}</a></li>
+                    @endforeach
+                </ul>
             </td>
         </tr>
     </table>

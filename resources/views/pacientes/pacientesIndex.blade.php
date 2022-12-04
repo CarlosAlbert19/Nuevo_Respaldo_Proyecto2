@@ -17,6 +17,7 @@
             <th>Ingreso</th>
             <th>Edicion</th>
             <th>Eliminacion</th>
+            <th>Acciones</th>
         </tr>
         @foreach ($pacientes as $paciente)
             <tr>
@@ -39,6 +40,9 @@
                         @method('DELETE')
                         <input type="submit" value="Eliminar">
                     </form>
+                </td>
+                <td>
+                    <a href="{{route('paciente/correo', $paciente)}}">Enviar correo de factura</a>
                 </td>
             </tr>
         @endforeach

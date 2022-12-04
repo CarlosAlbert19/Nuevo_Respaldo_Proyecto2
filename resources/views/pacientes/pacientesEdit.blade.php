@@ -92,6 +92,11 @@
                     @endforeach
                 </select>
             </label>
+            <br>
+            
+            <label for="archivo"> Historial clinico: <br>
+                <input type="file" name="archivo">
+            </label>
             <br><br>
 
             <input type="submit" value="Enviar">

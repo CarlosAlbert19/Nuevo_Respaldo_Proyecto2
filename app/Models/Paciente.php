@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Models\Medicamento;
+use App\Models\Archivo;
 
 class Paciente extends Model
 {
@@ -23,5 +24,10 @@ class Paciente extends Model
     public function medicamentos()
     {
         return $this->belongsToMany(Medicamento::class);
+    }
+
+    public function archivos()
+    {
+        return $this->hasMany(Archivo::class);
     }
 }

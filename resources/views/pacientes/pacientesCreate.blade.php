@@ -9,7 +9,7 @@
 <body bgcolor="#00D3D6">
     <h1>Registro de pacientes en el Hospital Amparito</h1><br>
     <h3>Usuario: {{\Auth::user()->name}}</h3><br>
-    <form action="/paciente" method="POST">
+    <form action="/paciente" method="POST" enctype="multipart/form-data">
             @csrf
             
             <label for="name"> Nombre del paciente:<br> 
@@ -91,6 +91,11 @@
                         <option value="{{$medicamento->id}}">{{ $medicamento->nombre }}</option>
                     @endforeach
                 </select>
+            </label>
+            <br>
+            
+            <label for="archivo"> Historial clinico: <br>
+                <input type="file" name="archivo">
             </label>
             <br><br>
 

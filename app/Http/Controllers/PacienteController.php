@@ -9,6 +9,10 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use Illuminate\Support\Facades\Gate;
 use App\Providers\PacientePolicy;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\FacturaConsulta;
+use App\Models\Archivo;
+use Illuminate\Support\Facades\Storage;
 
 class PacienteController extends Controller
 {
@@ -65,6 +69,20 @@ class PacienteController extends Controller
         $paciente = Paciente::create($request->all());
 
         $paciente->medicamentos()->attach($request->medicamentos_id);
+
+
+        //ARCHIVOS
+
+        if ($request->file('archivo')->isValid()){
+            $ubicacion = $request->archivo->store('pacientes');
+
+            $archivo = new Archivo();
+            $archivo->ubicacion = $ubicacion;
+            $archivo->nombre_original = $request->archivo->getClientOriginalName();
+            $archivo->mime = '';
+
+            $paciente->archivos()->save($archivo);
+        }
 
         return redirect('/paciente');
     }
@@ -158,5 +176,22 @@ class PacienteController extends Controller
     public function pagina_de_caida()
     {
         return view('landingpage');
+    }
+
+    public function notificarFactura(Paciente $paciente)
+    {
+        Mail::to($paciente->user->email)->send(new FacturaConsulta($paciente));
+
+        return back();
+    }
+
+    public function descargaArchivo(Archivo $archivo)
+    {
+        return Storage::download($archivo->ubicacion, $archivo->nombre_original);
+    }
+
+    public function eliminarArchivo(Archivo $archivo)
+    {
+        return Storage::delete($archivo->ubicacion);
     }
 }

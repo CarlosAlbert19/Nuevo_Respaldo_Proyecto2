@@ -30,3 +30,7 @@ Route::middleware([
         return view('dashboard');
     })->name('dashboard');
 });
+
+Route::get('/paciente/correo/{paciente}', [PacienteController::class, 'notificarFactura'])->name('paciente/correo');
+
+Route::get('/descarga/{archivo}', [PacienteController::class, 'descargaArchivo'])->name('descarga');
