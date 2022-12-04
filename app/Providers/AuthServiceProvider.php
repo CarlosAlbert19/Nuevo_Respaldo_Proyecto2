@@ -5,6 +5,10 @@ namespace App\Providers;
 use App\Models\Team;
 use App\Policies\TeamPolicy;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
+use Illuminate\Support\Facades\Gate;
+use App\Models\User;
+use App\Models\Paciente;
+use App\Providers\PacientePolicy;
 
 class AuthServiceProvider extends ServiceProvider
 {
@@ -15,6 +19,7 @@ class AuthServiceProvider extends ServiceProvider
      */
     protected $policies = [
         Team::class => TeamPolicy::class,
+        //Paciente::class => PacientePolicy::class,
     ];
 
     /**
@@ -26,6 +31,8 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
-        //
+        Gate::define('edita-paciente', function (User $user, Paciente $paciente) {
+            return $user->id === $paciente->user_id;
+        });
     }
 }

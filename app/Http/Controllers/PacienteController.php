@@ -7,6 +7,8 @@ use App\Models\Medicamento;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
+use Illuminate\Support\Facades\Gate;
+use App\Providers\PacientePolicy;
 
 class PacienteController extends Controller
 {
@@ -21,7 +23,7 @@ class PacienteController extends Controller
      */
     public function index()
     {
-        $pacientes = Paciente::all();
+        $pacientes = Paciente::with('user', 'medicamentos')->get();
         //$pacientes = Paciente::where('user_id', Auth::id())->get(); 
         //$pacientes = Auth::user()->pacientes;
         //$pacientes = $user->pacientes;
@@ -86,6 +88,10 @@ class PacienteController extends Controller
      */
     public function edit(Paciente $paciente)
     {
+        if (! Gate::allows('edita-paciente', $paciente)) {
+            abort(403);
+        }
+
         $users = User::all();
         $medicamentos = Medicamento::all();
         return view('pacientes/pacientesEdit', compact('paciente', 'users', 'medicamentos'));
@@ -141,6 +147,8 @@ class PacienteController extends Controller
     public function destroy(Paciente $paciente)
     {
         //$paciente->medicamentos->detach();
+
+        $this->authorize('delete', $paciente);
 
         $paciente->delete();
 
