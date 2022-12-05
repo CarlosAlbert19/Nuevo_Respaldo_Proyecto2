@@ -1,11 +1,21 @@
 <x-plantilla titulo="Detalles del paciente">
+    @vite(['resources/css/materialize.css', 'resources/js/materialize.js'])
     <!--<h1>Detalles del paciente</h1>-->
 
-    <a href="/paciente">Regresar a la lista de pacientes</a><br><br>
+    <!--<a href="/paciente">Regresar a la lista de pacientes</a><br><br>-->
 
-    <h2>Paciente: {{ $paciente->nombre }}</h2>
+    <div class="card-panel teal green lighten-4"><h5 class="center-align"><a href="/paciente">Regresar</a></h5></div>
+    <div class="card-panel teal green lighten-4"><h5 class="center-align"><a href="/paciente/create">Ingresar paciente al hospital</a></h5></div>
 
-    <table border="1">
+    <div class="card-panel teal green accent-2"><h2>Paciente: {{ $paciente->nombre }}</h2></div>
+
+    <!--<h2>Paciente: {{ $paciente->nombre }}</h2>-->
+
+    @if(session('message'))
+        <div class="alert alert-success">{{session('message')}}</div>
+    @endif
+
+    <table class="highlight">
         <tr>
             <th>ID</th>
             <th>Usuario</th>

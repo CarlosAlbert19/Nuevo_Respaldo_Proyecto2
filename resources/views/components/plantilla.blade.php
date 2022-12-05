@@ -9,7 +9,7 @@
     @vite(['resources/css/materialize.css', 'resources/js/materialize.js'])    
 </head>
 <body>
-    <h1>{{ $titulo }}</h1>
+<div class="card-panel teal lighten-2"><h1 class="center-align">{{ $titulo }}</h1></div>
     {{ $slot }}
 </body>
 </html>

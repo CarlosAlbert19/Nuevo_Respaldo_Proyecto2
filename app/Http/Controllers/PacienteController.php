@@ -84,7 +84,7 @@ class PacienteController extends Controller
             $paciente->archivos()->save($archivo);
         }
 
-        return redirect('/paciente');
+        return redirect('/paciente')->with('message','Se ha creado el registro del paciente con éxito');
     }
 
     /**
@@ -151,7 +151,7 @@ class PacienteController extends Controller
         $paciente->medicamentos()->sync($request->medicamentos_id);
 
         //return redirect()->route('paciente/show', $paciente->id);
-        return view('pacientes/pacienteShow', compact('paciente'));
+        return view('pacientes/pacienteShow', compact('paciente'))->with('message','Se ha editado el registro del paciente con éxito');
         
 
     }
@@ -170,7 +170,7 @@ class PacienteController extends Controller
 
         $paciente->delete();
 
-        return redirect('/paciente');
+        return redirect('/paciente')->with('message','Se ha eliminado el registro del paciente con éxito');
     }
 
     public function pagina_de_caida()
